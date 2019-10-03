@@ -1,3 +1,3 @@
-# Gimbal Travis CI Integration
+# Bitbucket Pipelines Integration
 
 TODO
