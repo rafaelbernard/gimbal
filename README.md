@@ -67,7 +67,7 @@ yarn audit
 
 You don't need to [Configure Gimbal](./packages/gimbal/docs/config), but we understand that defaults are _optimistic_, at least for existing projects that want to introduce performance budgeting.
 
-To ease you being ready to use, let's start with some **sample `.gimbalrc.yml` config** files:
+To ease you be ready to use, let's start with some **sample `.gimbalrc.yml` config** files:
 
 1. Minimal
 2. Minimal with all native audits
@@ -102,8 +102,12 @@ configs:
 
 Before executing this config file you should install mentioned plugins. For instance:
 
-```
+```sh
+# with npm
 npm install @modus/gimbal-plugin-axe @modus/gimbal-plugin-last-value @modus/gimbal-plugin-sqlite
+
+# or with yarn
+yarn add @modus/gimbal-plugin-axe @modus/gimbal-plugin-last-value @modus/gimbal-plugin-sqlite
 ```
 
 In case you don't use `build` as your build directory and an exception raises with an error 
