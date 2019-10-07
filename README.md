@@ -45,6 +45,8 @@ npm install --save-dev @modus/gimbal
 yarn add --dev @modus/gimbal
 ```
 
+Your project should have been built in order to execute gimbal.
+
 You can execute it via a npm script: (`package.json`):
 
 ```json
@@ -72,6 +74,8 @@ To ease you be ready to use, let's start with some **sample `.gimbalrc.yml` conf
 1. Minimal
 2. Minimal with all native audits
 3. Using other audit plugins and more sample configurations
+
+Please, make sure your project was build before executing gimbal.
 
 You may save them as your `.gimbalrc.yml` file and run `gimbal`.
 
