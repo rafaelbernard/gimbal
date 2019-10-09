@@ -38,7 +38,7 @@ config:
 
 Heap snapshot threshold parameters configurations:
 
-### Documents
+#### Documents
 
 - Type: int
 - Default value: 5
@@ -50,7 +50,7 @@ config:
       Documents: 5
 ```
 
-### Frames
+#### Frames
 
 - Type: int
 - Default value: 2
@@ -62,7 +62,7 @@ config:
       Frames: 2
 ```
 
-### LayoutCount
+#### LayoutCount
 
 - Type: int
 - Default value: 5
@@ -74,7 +74,7 @@ config:
       LayoutCount: 5
 ```
 
-### Nodes
+#### Nodes
 
 - Type: int
 - Default value: 75
@@ -86,7 +86,7 @@ config:
       Nodes: 75
 ```
 
-### RecalcStyleCount
+#### RecalcStyleCount
 
 - Type: int
 - Default value: 6
