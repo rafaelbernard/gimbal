@@ -36,11 +36,39 @@ config:
 
 ## heap-snapshot
 
-Heap snapshot threshold parameters configurations:
+Heap snapshot threshold parameters configurations. All minimum default configurations and values aplied should look like:
+
+```yaml
+config:
+  heap-snapshot:
+    threshold:
+      Documents: 5
+      Frames: 2
+      LayoutCount: 5
+      Nodes: 75
+      RecalcStyleCount: 6
+```
+
+The complete configuration should look like:
+
+```yaml
+configs:
+  heap-snapshot:
+    threshold:
+      Documents: 5
+      Frames: 2
+      JSHeapTotalSize: 200000
+      JSHeapUsedSize: 100000
+      LayoutCount: 5
+      Nodes: 75
+      RecalcStyleCount: 4
+```
 
 #### Documents
 
-- Type: int
+Number of documents in the page.
+
+- Type: number
 - Default value: 5
 
 ```yaml
@@ -52,7 +80,9 @@ config:
 
 #### Frames
 
-- Type: int
+Number of frames in the page.
+
+- Type: number
 - Default value: 2
 
 ```yaml
@@ -64,7 +94,9 @@ config:
 
 #### LayoutCount
 
-- Type: int
+Total number of full or partial page layout.
+
+- Type: number
 - Default value: 5
 
 ```yaml
@@ -76,7 +108,9 @@ config:
 
 #### Nodes
 
-- Type: int
+Number of DOM nodes in the page.
+
+- Type: number
 - Default value: 75
 
 ```yaml
@@ -88,7 +122,9 @@ config:
 
 #### RecalcStyleCount
 
-- Type: int
+Total number of page style recalculations.
+
+- Type: number
 - Default value: 6
 
 Example:
@@ -98,6 +134,38 @@ config:
   heap-snapshot:
     threshold:
       RecalcStyleCount: 6
+```
+
+#### JSHeapTotalSize
+
+Total JavaScript heap size.
+
+- Type: number
+- Default value: none
+
+Example:
+
+```yaml
+config:
+  heap-snapshot:
+    threshold:
+      JSHeapTotalSize: 200000
+```
+
+#### JSHeapUsedSize
+
+Used JavaScript heap size.
+
+- Type: number
+- Default value: none
+
+Example:
+
+```yaml
+config:
+  heap-snapshot:
+    threshold:
+      JSHeapUsedSize: 100000
 ```
 
 
