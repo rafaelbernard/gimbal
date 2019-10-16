@@ -6,6 +6,7 @@ The configuration will be splited by audit types:
 
 - [size](#size)
 - [heap-snapshot](#heap-snapshot)
+- [lighthouse](#lighthouse)
 
 ## size
 
@@ -16,7 +17,7 @@ Sets thresholds for given paths.
 Example:
 
 ```yaml
-config:
+configs:
   size:
     - path: ./build/precache-*.js
       maxSize: 10 KB
@@ -39,7 +40,7 @@ config:
 Heap snapshot threshold parameters configurations. All minimum default configurations and values aplied should look like:
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       Documents: 5
@@ -72,7 +73,7 @@ Number of documents in the page.
 - Default value: 5
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       Documents: 5
@@ -86,7 +87,7 @@ Number of frames in the page.
 - Default value: 2
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       Frames: 2
@@ -100,7 +101,7 @@ Total number of full or partial page layout.
 - Default value: 5
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       LayoutCount: 5
@@ -114,7 +115,7 @@ Number of DOM nodes in the page.
 - Default value: 75
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       Nodes: 75
@@ -130,7 +131,7 @@ Total number of page style recalculations.
 Example:
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       RecalcStyleCount: 6
@@ -146,7 +147,7 @@ Total JavaScript heap size.
 Example:
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       JSHeapTotalSize: 200000
@@ -162,10 +163,78 @@ Used JavaScript heap size.
 Example:
 
 ```yaml
-config:
+configs:
   heap-snapshot:
     threshold:
       JSHeapUsedSize: 100000
 ```
 
 
+## lighthouse
+
+Google lighthouse threshold parameters configurations. All minimum default configurations and values aplied should look like:
+
+```yaml
+configs:
+  lighthouse:
+    skipAudits:
+      - uses-http2
+      - redirects-http
+      - uses-long-cache-ttl
+    threshold:
+      accessibility: 75
+      "best-practices": 95
+      performance: 50
+      pwa: 52
+      seo: 90
+```
+
+extends: 'lighthouse:default',
+  settings: {
+    skipAudits: ['uses-http2', 'redirects-http', 'uses-long-cache-ttl'],
+  },
+  threshold: {
+    accessibility: 75,
+    'best-practices': 95,
+    performance: 50,
+    pwa: 50,
+    seo: 90,
+  },
+
+The complete configuration should look like:
+
+```yaml
+configs:
+  lighthouse:
+    skipAudits:
+      - uses-http2
+      - redirects-http
+      - uses-long-cache-ttl
+      - uses-text-compression
+    outputHtml: artifacts/lighthouse.html
+    threshold:
+      accessibility: 90
+      "best-practices": 92
+      performance: 64
+      pwa: 52
+      seo: 100
+```
+
+#### skipAudits
+
+Excludes the specified audits from the final report.
+
+- Type: string[]
+- Default value: [uses-http2, redirects-http, uses-long-cache-ttl]
+
+Example:
+
+```yaml
+configs:
+  lighthouse:
+    skipAudits:
+      - uses-http2
+      - redirects-http
+      - uses-long-cache-ttl
+      - uses-text-compression
+```
