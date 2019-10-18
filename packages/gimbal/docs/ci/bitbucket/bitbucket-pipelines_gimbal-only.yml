@@ -1,53 +1,10 @@
-image: node:10.15.3
-
-definitions:
-  services:
-    docker:
-      memory: 2048
-  steps:
-    - step: &step-install
-        name: Install
-        caches:
-          - node
-        script:
-          # - npm install -g snyk @modus/gimbal
-          - npm install
-          - npm run-script build
-          #- snyk protect
-        artifacts:
-          #######
-          # Important to save the build to artifacts
-          # so Gimbal step can retrieve the build
-          #######
-          - dist/**
-
-    - step: &step-snyk
-        name: Snyk protect
-        caches:
-          - node
-        script:
-          - npm install -g snyk
-          - snyk protect
-
-    - step: &step-gimbal
-        name: Gimbal Audit
-        # use the gimbal docker container for this step only
-        image: moduscreate/gimbal:1.2-latest
-        script:
-          - gimbal audit
-        artifacts:
-          - gimbal-artifacts/**
+image: moduscreate/gimbal:latest
 
 pipelines:
   default:
-    - step: *step-install
-    - step: *step-gimbal
-  pull-requests:
-    '**':
-      - step: *step-install
-      - step: *step-snyk
-      - step: *step-gimbal
-  branches:
-    master:
-      - step: *step-install
-      - step: *step-gimbal
+    - step:
+      name: Gimbal audit
+      script:
+        - npm install
+        - npm run-script build
+        - gimbal audit
