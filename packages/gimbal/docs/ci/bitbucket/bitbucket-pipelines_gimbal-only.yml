@@ -1,26 +1,33 @@
 image: node:10.15.3
 
 definitions:
+  services:
+    docker:
+      memory: 2048
   steps:
-    ######
-    # This step definition emulates your actual install / build process
-    # This is what you must have already
-    ######
     - step: &step-install
         name: Install
         caches:
           - node
         script:
+          # - npm install -g snyk @modus/gimbal
           - npm install
           - npm run-script build
+          #- snyk protect
         artifacts:
           #######
           # Important to save the build to artifacts
           # so Gimbal step can retrieve the build
-          #
-          # You should set your build folder here
           #######
-          - your-build-folder/**
+          - dist/**
+
+    - step: &step-snyk
+        name: Snyk protect
+        caches:
+          - node
+        script:
+          - npm install -g snyk
+          - snyk protect
 
     - step: &step-gimbal
         name: Gimbal Audit
@@ -35,6 +42,11 @@ pipelines:
   default:
     - step: *step-install
     - step: *step-gimbal
+  pull-requests:
+    '**':
+      - step: *step-install
+      - step: *step-snyk
+      - step: *step-gimbal
   branches:
     master:
       - step: *step-install
