@@ -189,18 +189,6 @@ configs:
       seo: 90
 ```
 
-extends: 'lighthouse:default',
-  settings: {
-    skipAudits: ['uses-http2', 'redirects-http', 'uses-long-cache-ttl'],
-  },
-  threshold: {
-    accessibility: 75,
-    'best-practices': 95,
-    performance: 50,
-    pwa: 50,
-    seo: 90,
-  },
-
 The complete configuration should look like:
 
 ```yaml
@@ -237,4 +225,39 @@ configs:
       - redirects-http
       - uses-long-cache-ttl
       - uses-text-compression
+```
+
+#### outputHtml
+
+Location of the outputed HTML audit result.
+
+- Type: string
+- Default value: none
+
+Example:
+
+```yaml
+configs:
+  lighthouse:
+    outputHtml: artifacts/lighthouse.html
+```
+
+#### threshold
+
+Scores threshold for lighthouse audit.
+
+- Type: object[audit: score]
+- Default value: [accessibility: 75, "best-practices": 95, performance: 50, pwa: 52, seo: 90]
+
+Example:
+
+```yaml
+configs:
+  lighthouse:
+    threshold:
+      accessibility: 75
+      "best-practices": 95
+      performance: 50
+      pwa: 52
+      seo: 90
 ```
