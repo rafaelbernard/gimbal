@@ -7,6 +7,7 @@ The configuration will be splited by audit types:
 - [size](#size)
 - [heap-snapshot](#heap-snapshot)
 - [lighthouse](#lighthouse)
+- [unused-source](#unused-source)
 
 ## size
 
@@ -260,4 +261,34 @@ configs:
       performance: 50
       pwa: 52
       seo: 90
+```
+
+
+## unused-source
+
+The `unused-source` module is aimed to find CSS and JavaScript code that is unused. When a page is loaded, puppeteer returns ranges of all the CSS and JavaScript assets that tells Gimbal how much of each is used.
+
+Using a glob syntax, assets are matched using an array of objects with `path` and `maxSize` thresholds. The `maxSize` threshold is the percentage of unused source for each asset.
+
+An object can also take a `type` configuration to be able to properly match different sources in the same file. For example, there could be inline JavaScript and CSS in a single HTML page. If you have the same path for two objects, it's important the order they are in the array as the first match will be used.
+
+- Type: Path[] `Path { path: directoryPath, maxSize: thresholdSize }`
+
+Example:
+
+```yaml
+configs:
+  unused-source:
+    threshold:
+      - path: '**/*/*.css'
+        maxSize: 30%
+      - path: '**/*/main.*.js'
+        maxSize: 2%
+      - path: '**/*/*.js'
+        maxSize: 40%
+      - path: /
+        maxSize: 25%
+        type: js
+      - path: /
+        maxSize: 40%
 ```
