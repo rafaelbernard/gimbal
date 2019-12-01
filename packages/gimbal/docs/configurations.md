@@ -9,6 +9,10 @@ The configuration will be splited by audit types:
 - [lighthouse](#lighthouse)
 - [unused-source](#unused-source)
 
+Output configuration:
+
+- [output](#output)
+
 ## size
 
 Sets thresholds for given paths.
@@ -272,7 +276,7 @@ Using a glob syntax, assets are matched using an array of objects with `path` an
 
 An object can also take a `type` configuration to be able to properly match different sources in the same file. For example, there could be inline JavaScript and CSS in a single HTML page. If you have the same path for two objects, it's important the order they are in the array as the first match will be used.
 
-- Type: Path[] `Path { path: directoryPath, maxSize: thresholdSize }`
+- Type: Path[] `Path { path: directoryPath, maxSize: thresholdSize[, type: fileType] }`
 
 Example:
 
@@ -291,4 +295,75 @@ configs:
         type: js
       - path: /
         maxSize: 40%
+```
+
+## Output
+
+Outputs are related to useful information of gimbal outputs, such as cli output or reports.
+
+```yaml
+# Locations of reports. Useful for storing artifacts in CI
+outputs:
+  # Only show failures in CLI
+  cli:
+    onlyFailures: true
+  html: artifacts/results.html
+  json: artifacts/results.json
+  markdown: artifacts/results.md
+```
+
+#### CLI onlyFailures
+
+If gimbal CLI will output only the failures.
+
+- Type: boolean
+- Default value: false
+
+Example:
+
+```yaml
+output:
+  cli:
+    onlyFailures: false
+```
+
+#### html
+
+HTML report output
+
+- Type: string
+- Default value: none
+
+Example:
+
+```yaml
+output:
+  html: artifacts/results.html
+```
+#### json
+
+JSON report output
+
+- Type: string
+- Default value: none
+
+Example:
+
+```yaml
+output:
+  json: artifacts/results.json
+```
+
+#### markdown
+
+Markdown report output
+
+- Type: string
+- Default value: none
+
+Example:
+
+```yaml
+output:
+  markdown: artifacts/results.md
 ```
